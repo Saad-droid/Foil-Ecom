@@ -323,7 +323,7 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from  "../assets/logo.jpg";
+import logo from  "../assets/logo2.jpg";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -387,11 +387,24 @@ export default function Navbar() {
                 <Link className="main__logo--link" to="/">
                   <img
                     className="main__logo--img"
-                    src="https://www.foilkraft.in/images/logo.png"
-                    alt="logo-img"
+                    src={logo}
+                    alt="Mirai X Ventures logo"
                   />
                 </Link>
               </h1>
+            </div>
+
+            {/* Search */}
+            <div className="header__search d-none d-lg-flex">
+              <input
+                type="search"
+                className="header__search-input"
+                placeholder="Search products, categories..."
+                aria-label="Search Mirai X Ventures"
+              />
+              <button type="button" className="header__search-button button button-primary">
+                Search
+              </button>
             </div>
 
             {/* Desktop Menu */}
@@ -460,61 +473,66 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu */}
-         {mobileMenuOpen && (
-  <div className="mobile__menu ">
-    <nav className="mobile__menu--navigation">
-      <ul className="mobile__menu--list">
-        <li>
-          <Link to="/" onClick={closeMobileMenu}>
-            Home
-          </Link>
-        </li>
+          {mobileMenuOpen && (
+            <div className="mobile__menu-overlay" onClick={closeMobileMenu}>
+              <div className="mobile__menu" onClick={(event) => event.stopPropagation()}>
+                <button className="mobile__menu--close" onClick={closeMobileMenu} aria-label="Close menu">
+                  ×
+                </button>
+                <nav className="mobile__menu--navigation">
+                  <ul className="mobile__menu--list">
+                    <li>
+                      <Link to="/" onClick={closeMobileMenu}>
+                        Home
+                      </Link>
+                    </li>
 
-        <li>
-          <Link to="/about" onClick={closeMobileMenu}>
-            About Us
-          </Link>
-        </li>
+                    <li>
+                      <Link to="/about" onClick={closeMobileMenu}>
+                        About Us
+                      </Link>
+                    </li>
 
-        <li>
-          <Link to="/shop" onClick={closeMobileMenu}>
-            Products
-          </Link>
-        </li>
+                    <li>
+                      <Link to="/shop" onClick={closeMobileMenu}>
+                        Products
+                      </Link>
+                    </li>
 
-        <li>
-          <Link to="/shop" onClick={closeMobileMenu}>
-            Categories
-          </Link>
-        </li>
+                    <li>
+                      <Link to="/shop" onClick={closeMobileMenu}>
+                        Categories
+                      </Link>
+                    </li>
 
-        <li>
-          <Link to="/be-an-agent" onClick={closeMobileMenu}>
-            Be An Agent
-          </Link>
-        </li>
+                    <li>
+                      <Link to="/be-an-agent" onClick={closeMobileMenu}>
+                        Be An Agent
+                      </Link>
+                    </li>
 
-        <li>
-          <Link to="/blog" onClick={closeMobileMenu}>
-            Blog
-          </Link>
-        </li>
+                    <li>
+                      <Link to="/blog" onClick={closeMobileMenu}>
+                        Blog
+                      </Link>
+                    </li>
 
-        <li>
-          <Link to="/video-gallery" onClick={closeMobileMenu}>
-            Video Gallery
-          </Link>
-        </li>
+                    <li>
+                      <Link to="/video-gallery" onClick={closeMobileMenu}>
+                        Video Gallery
+                      </Link>
+                    </li>
 
-        <li>
-          <Link to="/contact" onClick={closeMobileMenu}>
-            Contact Us
-          </Link>
-        </li>
-      </ul>
-    </nav>
-  </div>
-)}
+                    <li>
+                      <Link to="/contact" onClick={closeMobileMenu}>
+                        Contact Us
+                      </Link>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

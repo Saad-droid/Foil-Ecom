@@ -24,7 +24,7 @@ export default function Contact() {
               </li>
               <li>
                 <strong>Email:</strong>
-                <a href="mailto:foil_kraft@hotmail.com">foil_kraft@hotmail.com</a>
+                <a href="mailto:contact@mirai-x-ventures.com">contact@mirai-x-ventures.com</a>
               </li>
               <li>
                 <strong>Address:</strong>

@@ -9,7 +9,7 @@ export default function BeAnAgent() {
         <p>We're always looking for passionate partners to help us reach new markets and customers.</p>
         <div className="agent-form mt-5">
           <h3>Interested? Get in Touch</h3>
-          <p>Contact us at: <strong>foil_kraft@hotmail.com</strong></p>
+          <p>Contact us at: <strong>contact@mirai-x-ventures.com</strong></p>
           <p>Phone: <strong>+91 7303511253</strong></p>
         </div>
       </div>

@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState('');
@@ -9,15 +12,46 @@ export default function ContactForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!ACCESS_KEY) {
+      setStatus('Form is not configured yet. Please add your Web3Forms access key.');
+      return;
+    }
+
     setStatus('Sending...');
 
-    setTimeout(() => {
-      console.log('Contact request sent', formData);
-      setStatus('Thank you! Your message has been received. We will contact you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 700);
+    try {
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          subject: formData.subject || 'New contact request',
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          reply_to: formData.email,
+          redirect: '',
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setStatus('Thank you! Your message has been received. We will contact you soon.');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setStatus(result.error || 'Unable to send message. Please try again later.');
+      }
+    } catch (error) {
+      setStatus('Unable to submit the form at this time. Please try again later.');
+      console.error('Web3Forms error:', error);
+    }
   };
 
   return (
